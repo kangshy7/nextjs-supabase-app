@@ -1,0 +1,15 @@
+{
+  "$schema": "https://unpkg.com/knip@latest/schema.json",
+  "entry": [
+    "app/**/{page,layout,route,loading,error,not-found,template}.{ts,tsx}",
+    "app/globals.css"
+  ],
+  "project": [
+    "app/**/*.{ts,tsx}",
+    "components/**/*.{ts,tsx}",
+    "lib/**/*.{ts,tsx}",
+    "types/**/*.{ts,tsx}"
+  ],
+  "ignore": ["components/ui/**"],
+  "ignoreDependencies": ["autoprefixer", "postcss", "tailwindcss-animate"]
+}

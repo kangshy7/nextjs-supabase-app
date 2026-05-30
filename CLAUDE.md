@@ -28,17 +28,17 @@ NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY=...   # anon key도 이 변수명으로 사
 
 ### 라우트 구조
 
-| 경로 | 역할 |
-|------|------|
-| `/` | 공개 홈 (미설정 시 튜토리얼, 설정 완료 시 회원가입 안내) |
-| `/auth/login` | 로그인 |
-| `/auth/sign-up` | 회원가입 |
-| `/auth/sign-up-success` | 회원가입 완료 안내 |
-| `/auth/forgot-password` | 비밀번호 재설정 요청 |
-| `/auth/update-password` | 새 비밀번호 설정 |
-| `/auth/confirm` | 이메일 OTP 검증 Route Handler |
-| `/auth/error` | 인증 오류 표시 |
-| `/protected/*` | 로그인 필수 보호 페이지 |
+| 경로                    | 역할                                                     |
+| ----------------------- | -------------------------------------------------------- |
+| `/`                     | 공개 홈 (미설정 시 튜토리얼, 설정 완료 시 회원가입 안내) |
+| `/auth/login`           | 로그인                                                   |
+| `/auth/sign-up`         | 회원가입                                                 |
+| `/auth/sign-up-success` | 회원가입 완료 안내                                       |
+| `/auth/forgot-password` | 비밀번호 재설정 요청                                     |
+| `/auth/update-password` | 새 비밀번호 설정                                         |
+| `/auth/confirm`         | 이메일 OTP 검증 Route Handler                            |
+| `/auth/error`           | 인증 오류 표시                                           |
+| `/protected/*`          | 로그인 필수 보호 페이지                                  |
 
 ### Supabase 클라이언트 선택 규칙
 
