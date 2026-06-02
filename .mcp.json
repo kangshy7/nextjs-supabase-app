@@ -24,11 +24,11 @@
     },
     "shrimp-task-manager": {
       "command": "node",
-      "args": ["c:/dev/workspace/mcp-shrimp-task-manager/distindex.js"],
+      "args": ["C:/dev/workspace/mcp-shrimp-task-manager/dist/index.js"],
       "env": {
         "DATA_DIR": "C:/dev/workspace/nextjs-supabase-app/shrimp_data",
         "TEMPLATES_USE": "en",
-        "ENABLE_GUI": "true"
+        "ENABLE_GUI": "false"
       }
     }
   }

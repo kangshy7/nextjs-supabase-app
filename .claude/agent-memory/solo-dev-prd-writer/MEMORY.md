@@ -1,0 +1,1 @@
+- [모임 이벤트 관리 MVP](project_event_management.md) — 핵심 도메인(이벤트/참여자/공지/카풀/정산), Phase 구분, 설계 결정 요약
