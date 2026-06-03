@@ -2,6 +2,7 @@ import { redirect, notFound } from "next/navigation";
 import Link from "next/link";
 import { createClient } from "@/lib/supabase/server";
 import { ParticipantRow } from "@/components/participants/ParticipantRow";
+import { RealtimeParticipantAlert } from "@/components/participants/RealtimeParticipantAlert";
 import { cn } from "@/lib/utils";
 import type { EventParticipant, ParticipantStatus } from "@/types/participant";
 
@@ -66,6 +67,8 @@ export default async function ParticipantsPage({ params, searchParams }: Partici
 
   return (
     <div className="flex flex-col gap-6">
+      {/* 주최자 전용 실시간 알림 (UI 없음, 토스트로 표시) */}
+      {isHost && <RealtimeParticipantAlert eventId={id} />}
       <h2 className="text-xl font-bold">참여자 관리</h2>
 
       <div className="flex gap-1 border-b">

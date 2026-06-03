@@ -5,6 +5,7 @@ import { ExpenseTable } from "@/components/settlement/ExpenseTable";
 import { SplitSummaryTable } from "@/components/settlement/SplitSummaryTable";
 import { ExpenseCreateForm } from "@/components/settlement/ExpenseCreateForm";
 import { ExpenseSplitList } from "@/components/settlement/ExpenseSplitList";
+import { UnpaidSummary } from "@/components/settlement/UnpaidSummary";
 import type { ExpenseWithPayer, SettlementSummaryItem } from "@/types/settlement";
 
 interface SettlementPageProps {
@@ -164,6 +165,11 @@ export default async function SettlementPage({ params }: SettlementPageProps) {
           <h3 className="text-base font-semibold">개인별 정산 요약</h3>
           <SplitSummaryTable summaryItems={summaryItems} />
         </section>
+      )}
+
+      {/* 미납 리마인더 (주최자 전용) */}
+      {isHost && summaryItems.length > 0 && (
+        <UnpaidSummary summaryItems={summaryItems} eventId={id} />
       )}
     </div>
   );
