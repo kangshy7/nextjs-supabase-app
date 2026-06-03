@@ -14,6 +14,9 @@ export default function ProtectedLayout({ children }: { children: React.ReactNod
           <div className="flex w-full max-w-5xl items-center justify-between p-3 px-5 text-sm">
             <div className="flex items-center gap-5 font-semibold">
               <Link href={"/"}>Next.js Supabase Starter</Link>
+              <Link href={"/protected/events"} className="text-sm font-medium hover:underline">
+                이벤트
+              </Link>
               <Link href={"/protected/profile"} className="text-sm font-medium hover:underline">
                 프로필
               </Link>
