@@ -13,3 +13,19 @@ export const expenseCreateSchema = z.object({
 });
 
 export type ExpenseCreateInput = z.infer<typeof expenseCreateSchema>;
+
+// 커스텀 분할용 스키마
+export const customExpenseSchema = expenseCreateSchema.extend({
+  splits: z
+    .array(
+      z.object({
+        participant_id: z.string().min(1),
+        amount: z
+          .number({ error: "금액을 입력해 주세요." })
+          .min(0, "0 이상의 금액을 입력해 주세요."),
+      })
+    )
+    .min(1, "분할 항목이 필요합니다."),
+});
+
+export type CustomExpenseInput = z.infer<typeof customExpenseSchema>;

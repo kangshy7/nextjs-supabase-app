@@ -3,6 +3,7 @@ import Link from "next/link";
 import { createClient } from "@/lib/supabase/server";
 import { EventStatusBadge } from "@/components/events/EventStatusBadge";
 import { CopyLinkButton } from "@/components/events/CopyLinkButton";
+import { DuplicateEventButton } from "@/components/events/DuplicateEventButton";
 import { Button } from "@/components/ui/button";
 import type { Event } from "@/types/event";
 import type { Announcement } from "@/types/announcement";
@@ -68,9 +69,12 @@ export default async function EventPage({ params }: EventPageProps) {
         <div className="flex items-center gap-2">
           <CopyLinkButton eventId={event.id} joinCode={event.join_code} />
           {isHost && (
-            <Button variant="outline" size="sm" asChild>
-              <Link href={`/protected/events/${event.id}/edit`}>수정</Link>
-            </Button>
+            <>
+              <Button variant="outline" size="sm" asChild>
+                <Link href={`/protected/events/${event.id}/edit`}>수정</Link>
+              </Button>
+              <DuplicateEventButton eventId={event.id} />
+            </>
           )}
         </div>
       </div>

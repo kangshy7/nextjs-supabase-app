@@ -1,5 +1,12 @@
 // 정산 관련 타입 정의
 
+export type SplitType = "equal" | "custom";
+
+export type CustomSplitItem = {
+  participant_id: string;
+  amount: number;
+};
+
 export type Expense = {
   id: string;
   event_id: string;
