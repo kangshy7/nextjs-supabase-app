@@ -1,0 +1,24 @@
+{
+  "name": "모임 이벤트 관리",
+  "short_name": "모임관리",
+  "description": "수영·헬스·친구 모임 주최자를 위한 이벤트 관리 앱",
+  "start_url": "/protected/events",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#0f172a",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "/icons/icon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icons/icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}

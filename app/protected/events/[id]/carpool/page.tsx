@@ -3,6 +3,7 @@ import { redirect, notFound } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
 import { CarpoolGroupCard } from "@/components/carpool/CarpoolGroupCard";
 import { CarpoolGroupCreateForm } from "@/components/carpool/CarpoolGroupCreateForm";
+import { CarpoolMatchSuggestion } from "@/components/carpool/CarpoolMatchSuggestion";
 import type { CarpoolMemberStatus } from "@/types/carpool";
 
 interface CarpoolPageProps {
@@ -104,6 +105,36 @@ export default async function CarpoolPage({ params }: CarpoolPageProps) {
     };
   });
 
+  // 카풀 미배정 수락 참여자 조회 (주최자 전용 매칭 제안용)
+  const isHost = event.host_id === userId;
+  let unassignedParticipants: { id: string; guest_name: string }[] = [];
+
+  if (isHost) {
+    const { data: allAccepted } = await supabase
+      .from("event_participants")
+      .select("id, guest_name")
+      .eq("event_id", id)
+      .eq("status", "accepted");
+
+    // 카풀 그룹에 소속된 participant_id 목록 (드라이버 + 수락된 멤버)
+    const assignedIds = new Set<string>();
+    groups.forEach((g) => assignedIds.add(g.driver_id));
+    membersRaw
+      .filter((m) => m.status === "accepted")
+      .forEach((m) => assignedIds.add(m.participant_id));
+
+    unassignedParticipants = (allAccepted ?? []).filter((p) => !assignedIds.has(p.id));
+  }
+
+  // 빈 자리 있는 그룹 목록
+  const availableGroups = groups
+    .map((g) => {
+      const members = membersByGroup[g.id] ?? [];
+      const acceptedCount = members.filter((m) => m.status === "accepted").length;
+      return { ...g, availableSeats: g.capacity - acceptedCount };
+    })
+    .filter((g) => g.availableSeats > 0);
+
   return (
     <div className="flex flex-col gap-6">
       <div className="flex items-center justify-between">
@@ -118,6 +149,14 @@ export default async function CarpoolPage({ params }: CarpoolPageProps) {
         <p className="rounded-lg border border-dashed p-4 text-sm text-muted-foreground">
           수락된 참여자만 카풀 그룹을 개설하거나 동승 신청할 수 있습니다.
         </p>
+      )}
+
+      {/* 주최자 전용: 카풀 미배정 참여자 매칭 제안 */}
+      {isHost && (
+        <CarpoolMatchSuggestion
+          unassignedParticipants={unassignedParticipants}
+          availableGroups={availableGroups}
+        />
       )}
 
       {/* 카풀 그룹 목록 */}
